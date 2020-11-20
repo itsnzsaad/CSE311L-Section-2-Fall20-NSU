@@ -1,0 +1,89 @@
+----------------------------------
+Departments Table
+----------------------------------
+CREATE TABLE departments (
+    department_id INT(4) PRIMARY KEY,
+    department_name VARCHAR(30) NOT NULL,
+    manager_id INT(6),
+    location_id INT(4)
+);
+
+INSERT INTO `departments` 
+(`department_id`, `department_name`, `manager_id`, `location_id`) 
+VALUES
+(10, 'Administration', 200, 1700),
+(20, 'Marketing', 201, 1800),
+(50, 'Shipping', 124, 1500),
+(60, 'IT', 103, 1400),
+(80, 'Sales', 149, 2500),
+(90, 'Executive', 100, 1700),
+(110 ,'Accounting', 205, 1700),
+(190 ,'Contracting', NULL, 1700)
+
+----------------------------------
+Locations Table
+----------------------------------
+CREATE TABLE locations (
+    location_id INT(4) NOT NULL PRIMARY KEY,
+    street_address VARCHAR(40),
+    postal_code VARCHAR(12),
+    city VARCHAR(30) NOT NULL,
+    state_province VARCHAR(25),
+    country_id VARCHAR(2)
+);
+
+INSERT INTO `locations` 
+(`location_id`, `street_address`, `postal_code`, `city`, `state_province`, `country_id`) 
+VALUES
+(1400, '2014 Jabberwocky Rd', '26192', 'Southlake', 'Texas', 'US'),
+(1500, '2011 Interiors Blvd', '99236', 'South San Francisco', 'California', 'US'),
+(1700, '2004 Charade Rd', '98199', 'Seattle', 'Washington', 'US'),
+(1800, '460 Bloor St. W.', 'ON M5S 1X8', 'Toronto', 'Ontario', 'CA'),
+(2500, 'Magdalen Center- The Oxford Sc. Park', 'OX9 9ZB', 'Oxford', 'Oxford', 'UK')
+
+----------------------------------
+Employees Table
+----------------------------------
+CREATE TABLE employees(
+    employee_Id INT(6) NOT NULL PRIMARY KEY,
+    first_name VARCHAR(20),
+    last_name VARCHAR(25) NOT NULL,
+    email VARCHAR(25) NOT NULL,
+    phone_number VARCHAR(15),
+    hire_date DATE NOT NULL,
+    job_id VARCHAR(10) NOT NULL,
+    salary INT(8),
+    commission_pct INT(2),
+    manager_id INT(6),
+    department_id INT(4)
+); 
+
+ALTER TABLE `employees` CHANGE `phone_number` `phone_number` VARCHAR(20);
+
+ALTER TABLE `employees` CHANGE `commission_pct` `commission_pct` FLOAT(2);
+
+INSERT INTO `employees` 
+(`employee_Id`, `first_name`, `last_name`, `email`, `phone_number`, `hire_date`, `job_id`, `salary`, `commission_pct`, `manager_id`, `department_id`) 
+VALUES
+(100, 'Steven', 'King', 'SKING', '515.123.4567', '1987-06-17', 'AD_PRES', 24000, NULL, NULL, 90),
+(101, 'Neena', 'Kochhar', 'NKOCHHAR', '515.123.4568', '1989-08-21', 'AD_VP', 1700, NULL, 100, 90),
+(102, 'Lex', 'De Haan', 'LDEHAAN', '515.123.4569', '1993-01-13', 'AD_VP', 17000, NULL, 100, 90),
+(103, 'Alexander', 'Hunold', 'AHUNOLD', '590.423.4567', '1990-01-03', 'IT_PROG', 9000, NULL, 102, 60),
+(104, 'Bruce', 'Ernst', 'BERNST', '590.423.4568', '1991-05-21', 'IT_PROG', 6000, NULL, 103, 60),
+(107, 'Diana', 'Lorentz', 'DLORETZ', '509.423.5567', '1999-02-07', 'IT_PROG', 4200, NULL, 103, 60),
+(124, 'Kevin', 'Mourgos', 'KMOURGOS', '650.123.5234', '1999-11-16', 'ST_MAN', 5800, NULL, 100, 50),
+(141, 'Trenna', 'Rajs', 'TRAJS', '650.121.8009', '1995-10-17', 'ST_CLERK', 3500, NULL, 124, 50),
+(142, 'Curtis', 'Davies', 'CDAVIES', '650.121.2994', '1997-01-29', 'ST_CLERK', 3100, NULL, 124, 50),
+(143, 'Randall', 'Matos', 'RMATOS', '650.121.2874', '1998-03-15', 'ST_CLERK', 2600, NULL, 124, 50),
+(144, 'Peter', 'Vargas', 'PVARGAS', '650.121.2004', '1998-06-09', 'ST_CLERK', 2500, NULL, 124, 50),
+(149, 'Eleni', 'Zlotkey', 'EZLOTKEY', '011.44.1344.429018', '2000-01-29', 'SA_MAN', 10500, .2, 100, 80),
+(174, 'Ellen', 'Abel', 'EABEL', '011.44.1644.429267', '1996-05-11', 'SA_REP', 11000, .3, 149, 80),
+(176, 'Jonathan', 'Taylor', 'JTAYLOR', '011.44.1644.429265', '1998-03-24', 'SA_REP', 8600, .2, 149, 80),
+(178, 'Kimberely', 'Grant', 'KGRANT', '011.44.1644.429263', '1999-05-24', 'SA_REP', 7000, .15, 149, NULL),
+(200, 'Jennifer', 'Whalen', 'JWHALEN', '515.123.4444', '1987-09-17', 'Ad_ASST', 4400, NULL, 101, 10),
+(201, 'Michael', 'Hartstein', 'MHARTSTE', '515.123.5555', '1996-02-17', 'MK_MAN', 13000, NULL, 100, 20),
+(202, 'Pat', 'Fay', 'PFAY', '603.123.6666', '1997-08-17', 'MK_REP', 6000, NULL, 201, 20),
+(205, 'Shelley', 'Higgins', 'SHIGGINS', '515.123.8080', '1994-06-07', 'AC_MGR', 12000, NULL, 101, 110),
+(206, 'William', 'Gietz', 'WGIETZ', '515.123.8181', '1994-06-07', 'AC_ACCOUNT', 8300, NULL, 205, 110);
+
+
