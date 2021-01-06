@@ -1,0 +1,44 @@
+Question 1
+-------------
+#I.Print the names of the oldest students who are in History and registered in a class taught by ‘Ivana Teach’.
+
+SELECT sname
+FROM Student
+WHERE major = 'History'
+AND
+snum IN (SELECT snum FROM Course WHERE cname IN (SELECT name FROM Class WHERE fid = 142519864 ));
+
+
+
+#II.Print the students name who are registered in 2 classes at the same time.
+
+SELECT DISTINCT S.sname
+FROM Student S
+WHERE S.snum IN 
+	(SELECT C1.snum 
+     FROM Course C1, Course C2
+     WHERE C1.snum = C2.snum)
+
+
+#III.Print all    the    name of the students who are enrolled in the maximum no of course/class.
+
+SELECT DISTINCT S.sname
+FROM Student S
+WHERE S.snum IN (
+    SELECT C.snum
+    FROM Course C
+    GROUP BY C.snum
+    HAVING COUNT(*) >= ALL (
+        SELECT COUNT(*)
+        FROM Course C2
+        GROUP BY C2.snum 
+       )
+	)
+
+
+# IV.Print the students name who are not registered in any class/course.
+
+SELECT DISTINCT S.sname
+FROM Student S
+WHERE S.snum NOT IN (SELECT C.snum
+FROM Course C )
